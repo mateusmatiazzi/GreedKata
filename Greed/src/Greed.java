@@ -7,6 +7,14 @@ public class Greed {
         int pontuacao = 0;
         List<Integer> quantidadeDeCadaNumero = retornaQuantidadeDeCadaNumero(lanceDeDados);
 
+        if(ehUmaSequencia(quantidadeDeCadaNumero)){
+            return 1200;
+        }
+
+        if (saoTresPares(quantidadeDeCadaNumero)){
+            return 800;
+        }
+
         for (int numeroDeRepeticoes=6;numeroDeRepeticoes>=3;numeroDeRepeticoes--){
             if(temNNumeroNaListaDeQuantidades(quantidadeDeCadaNumero, numeroDeRepeticoes)){
                 pontuacao += pontuacaoDoNumeroRepetido(quantidadeDeCadaNumero, numeroDeRepeticoes);
@@ -19,6 +27,29 @@ public class Greed {
             pontuacao += quantidadeDeCadaNumero.get(5)*50;
         }
         return pontuacao;
+    }
+
+    private boolean saoTresPares(List<Integer> quantidadeDeCadaNumero) {
+        int quantidadeDePares = 0;
+        for (int quantidadeNumeroI = 1; quantidadeNumeroI <= 6; quantidadeNumeroI++) {
+            if (quantidadeDeCadaNumero.get(quantidadeNumeroI) == 2){
+                quantidadeDePares++;
+            }
+        }
+        return quantidadeDePares == 3;
+    }
+
+    private boolean ehUmaSequencia(List<Integer> quantidadeDeCadaNumero) {
+        boolean ehSequencia = true;
+
+        for (int quantidadeNumeroI = 1; quantidadeNumeroI <= 6; quantidadeNumeroI++) {
+            if (quantidadeDeCadaNumero.get(quantidadeNumeroI) != 1) {
+                ehSequencia = false;
+                break;
+            }
+        }
+
+        return ehSequencia;
     }
 
     private int pontuacaoDoNumeroRepetido(List<Integer> quantidadeDeCadaNumero, int numeroDeRepeticoes) {

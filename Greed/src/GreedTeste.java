@@ -60,4 +60,22 @@ public class GreedTeste {
         esperado = 1600;
         assertEquals(esperado, greed.pontuacao(Arrays.asList(2, 4, 4, 4, 4, 4)));
     }
+
+    @Test
+    void deveDarAPontuacaoParaUmaSequencia() {
+        esperado = 1200;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(1, 2, 3, 4, 5, 6)));
+    }
+
+    @Test
+    void deveDarAPontuacaoParaTresPares() {
+        esperado = 800;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(2, 2, 3, 3, 4, 4)));
+    }
+
+    @Test
+    void deveDarAPontuacaoPara3Repeticoes1E5() {
+        esperado = 400;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(2, 2, 2, 1, 5, 5)));
+    }
 }
