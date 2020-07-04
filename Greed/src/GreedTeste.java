@@ -1,40 +1,63 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GreedTeste {
 
     Greed greed;
-    int atual;
-    List<Integer> lanceDeDados;
+    int esperado;
 
     @BeforeEach
     void inicializaTestes(){
         greed = new Greed();
-        atual = 0;
-        lanceDeDados = new ArrayList<Integer>();
+        esperado = 0;
     }
 
     @Test
-    void deveDarAPontuacaoQuandoSoTemONumeroUm() {
-        lanceDeDados.addAll(Arrays.asList(1, 2, 2, 4, 3, 6));
-        atual = 100;
+    void deveRetornarAPontuacaoParaONumeroUm() {
+        esperado = 100;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(1, 2, 2, 4, 3, 6)));
 
-        assertEquals(atual, greed.pontuacao(lanceDeDados));
+        esperado = 200;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(1, 1, 2, 4, 3, 6)));
+
+        esperado = 1000;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(1, 1, 1, 4, 3, 6)));
+
+        esperado = 2000;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(1, 1, 1, 1, 3, 6)));
+
+        esperado = 4000;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(1, 1, 1, 1, 1, 6)));
+
+        esperado = 8000;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(1, 1, 1, 1, 1, 1)));
     }
 
     @Test
-    void deveDarAPontuacaoQuandoTemDoisNumerosUns() {
-        lanceDeDados.addAll(Arrays.asList(1, 2, 2, 4, 3, 6));
-       atual = 200;
+    void deveDarAPontuacaoParaNumeroDois() {
+        esperado = 0;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(3, 2, 2, 4, 3, 6)));
 
-       assertEquals(atual, greed.pontuacao(lanceDeDados));
+        esperado = 200;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(2, 2, 2, 4, 3, 6)));
+
+        esperado = 1600;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(2, 2, 2, 2, 2, 2)));
+    }
+
+    @Test
+    void deveDarAPontuacaoParaNumeroQuatro() {
+        esperado = 0;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(3, 2, 2, 4, 3, 6)));
+
+        esperado = 400;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(2, 2, 3, 4, 4, 4)));
+
+        esperado = 1600;
+        assertEquals(esperado, greed.pontuacao(Arrays.asList(2, 4, 4, 4, 4, 4)));
     }
 }
